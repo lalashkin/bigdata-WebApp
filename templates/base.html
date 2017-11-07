@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{{title}}</title>
+		<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    	<!--Bootstrap Enabled -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" 
+		crossorigin="anonymous">
+		<!-- Own Stylesheet -->
+		<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'style.css') }}">
+		<!--JQuery, SocketIO, Bootstrap -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+	</head>
+	<body>
+	    <nav class="navbar navbar-expand-md navbar-dark mb-4 style-navbar">
+      		<a class="navbar-brand" href="#">Peka Squad</a>
+      		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="true" aria-label="Toggle navigation">
+        		<span class="navbar-toggler-icon"></span>
+      		</button>
+	      	<div class="navbar-collapse collapse" id="navbarCollapse">
+		        <ul class="navbar-nav ml-auto">
+		          <li class="nav-item active">
+		            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+		          </li>
+		          <li class="nav-item">
+		            <a class="nav-link" href="#">About</a>
+		          </li>
+		          <li class="nav-item mr-auto">
+		            <a class="nav-link" href="#">Login</a>
+		          </li>
+		        </ul>
+	      	</div>
+    	</nav> 
+	    <div class="container-fluid style-container">
+	    	<div class="row">	
+		    	<div class="col-md-2 d-none d-md-none d-xl-block">
+		    		<div class="style-content">
+		    			{% block smth %}{% endblock %}
+		    		</div>
+		    	</div>
+		    	<div class="col-md-7 col-xl-6">
+		    		<div class="style-content">
+		    			{% block console %}{% endblock %}
+		    		</div>
+		    	</div>
+		    	<div class="col-md-5 col-xl-4 d-none d-md-block sidebar">
+		    		<div class="style-content">
+			    		<div class="explorer-content">
+				    		<p class="headline">Your files</p>
+				    		{% block explorer %}{% endblock %}
+			    		</div>
+		    		</div>
+		    	</div>
+	    	</div>
+	    </div>
+	    <script type="text/javascript">
+			$(document).ready(function() {
+				var url = "http://" + document.domain + ":" + location.port;
+				var socket = io.connect(url + "/rdb");
+
+				$("#messagebox").focus();
+
+				socket.on("dbcommand", function(msg) {
+					console.log("recived message " + msg.resp);
+					$("#console-log").append(msg.resp + "<br>");
+				});
+
+				$("#console-form").submit(function() {
+					console.log($("#messagebox").val());
+					socket.emit("dbcommand", $("#messagebox").val());
+					$("#messagebox").val('');
+					$("#messagebox").focus();
+					return false;
+				});
+
+				$("#uploadform").submit(function() {
+					$("#uploadform").hide();
+					$("#messagebox").focus();
+				});
+			});
+		</script>
+  	</body>
+</html>

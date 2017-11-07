@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block smth %}
+	<p class="text-content">This is the placeholder for user-based functionality.</p>
+{% endblock %}	
+{% block console %}
+	<h3><b>>Main console</b></h3>
+	<div class="style-console">
+		<div id="console-log">
+			Use this console to interract with our Web-App.
+			<br>
+			Copyright PekaSquad&#169; 2017
+			<br>
+		</div>
+		<form action="#" id="console-form">
+			<input type="text" id="messagebox" autocomplete="off"></input>
+			<input type="submit" id="console-submit"></input>
+		</form>
+	</div>
+{% endblock %}	
+{% block explorer %}
+	<div class="row">
+		<div class="container">
+			<div class="style-content style-file-list"></div>
+			<form method="post" enctype="multipart/form-data" id="uploadform" action="#">
+				<p><input type="file" name="file"></p>
+				<div class="style-field"><label>Sheet name:</label> <input type="text" name="table" class="input-field"></div>
+				<div class="style-field"><label>Column #:</label><input type="text" name="column" class="input-field"></div>
+				<input type="submit" value="Analyse" id="file-upload">
+			</form>
+		</div>
+		</form>
+	</div>
+{% endblock %}

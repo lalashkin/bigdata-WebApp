@@ -1,0 +1,84 @@
+label {
+	text-align: right;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px white inset;
+    color: white;
+}
+
+#messagebox{
+	padding-left: 6px;
+	border: none;
+	background-color: black;
+	color: white;
+}
+
+#messagebox:focus{
+	outline: none;
+}
+
+#console-submit{
+	visibility: hidden;
+}
+
+#console-log{
+	word-wrap: break-word;
+}
+
+#file-upload{
+	color: white;
+	background-color: #4298f4;
+	border: none;
+}
+
+.input-field {
+	width: 65%;
+	float: right;
+}
+
+.style-console{
+	height: 500px;
+	padding-left: 3px;
+	border-radius: 5px;
+	background-color: black;
+	color: white;
+	font-family: 'Inconsolata', monospace;
+	overflow-y: auto;
+}
+	
+.style-navbar{
+	background-color: #4298f4;
+	color: #ffffff;
+}
+
+.style-content{
+	border: 1px solid #b5ccff;
+	border-radius: 5px;
+	margin: 5px 0px 5px 0px;
+	padding: 5px 10px 5px 10px;
+}
+
+.style-subcontent{
+	border: 1px solid #d2d7e0;
+	margin: 5px 0px 5px 0px;
+	padding: 0px 5px 0px 5px;
+}
+
+.logo-style{
+	width: 25px
+	height: 25px;
+}
+
+.headline{
+	text-align: center;
+	font-weight: bold;
+}
+
+.explorer-content{
+	margin: 5px 0px 5px 0px;
+}
+
+.text-content{
+	text-align: justify;
+}
